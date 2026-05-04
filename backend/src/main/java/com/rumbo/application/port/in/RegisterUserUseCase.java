@@ -17,7 +17,7 @@ public interface RegisterUserUseCase {
     ) {}
 
     record RegisterUserResult(
-            Long userId,
+            java.util.UUID userId,
             String email,
             String nombre,
             String apellidos

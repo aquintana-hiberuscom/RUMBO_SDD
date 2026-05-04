@@ -2,7 +2,7 @@ package com.rumbo.infrastructure.adapter.in.web;
 
 import java.util.UUID;
 
-public record RegisterResponse(
+public record LoginResponse(
         UUID userId,
         String email,
         String nombre,

@@ -1,0 +1,57 @@
+<section class="login-page" aria-labelledby="login-title">
+  <div class="login-card">
+    <h1 id="login-title">Bienvenido a RUMBO</h1>
+    <p class="subtitle">Inicia sesión para continuar tu aprendizaje</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+      <!-- Email -->
+      <div class="field" [class.field--error]="isFieldInvalid('email')">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          aria-required="true"
+          [attr.aria-invalid]="isFieldInvalid('email')"
+          [attr.aria-describedby]="isFieldInvalid('email') ? 'email-error' : null"
+        />
+        <span *ngIf="isFieldInvalid('email')" id="email-error" class="field__error" role="alert">
+          {{ getFieldError('email') }}
+        </span>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="field" [class.field--error]="isFieldInvalid('password')">
+        <label for="password">Contraseña</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          autocomplete="current-password"
+          aria-required="true"
+          [attr.aria-invalid]="isFieldInvalid('password')"
+          [attr.aria-describedby]="isFieldInvalid('password') ? 'password-error' : null"
+        />
+        <span *ngIf="isFieldInvalid('password')" id="password-error" class="field__error" role="alert">
+          {{ getFieldError('password') }}
+        </span>
+      </div>
+
+      <!-- Error de servidor (AC-02: mensaje genérico) -->
+      <div *ngIf="serverError" class="server-error" role="alert">
+        {{ serverError }}
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
+        {{ isLoading ? 'Entrando...' : 'Entrar' }}
+      </button>
+
+    </form>
+
+    <p class="register-link">
+      ¿No tienes cuenta? <a routerLink="/registro">Regístrate</a>
+    </p>
+  </div>
+</section>

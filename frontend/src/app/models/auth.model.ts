@@ -7,7 +7,20 @@ export interface RegisterRequest {
 }
 
 export interface RegisterResponse {
-  userId: number;
+  userId: string;
+  email: string;
+  nombre: string;
+  apellidos: string;
+  token: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  userId: string;
   email: string;
   nombre: string;
   apellidos: string;

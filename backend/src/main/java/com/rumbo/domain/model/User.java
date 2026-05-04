@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 /**
  * User domain entity.
  * NO Spring annotations. NO JPA annotations. Pure domain object.
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
 
-    private Long id;
+    private UUID id;
     private String email;
     private String nombre;
     private String apellidos;

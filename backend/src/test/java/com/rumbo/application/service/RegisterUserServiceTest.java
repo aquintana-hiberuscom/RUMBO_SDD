@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.*;
@@ -43,7 +45,7 @@ class RegisterUserServiceTest {
         given(passwordEncoder.encode("password123")).willReturn("hashed_password");
         given(userRepository.save(any(User.class))).willAnswer(invocation -> {
             User user = invocation.getArgument(0);
-            user.setId(1L);
+            user.setId(UUID.randomUUID());
             return user;
         });
 
@@ -51,7 +53,7 @@ class RegisterUserServiceTest {
         RegisterUserUseCase.RegisterUserResult result = registerUserService.register(validCommand);
 
         // Then
-        assertThat(result.userId()).isEqualTo(1L);
+        assertThat(result.userId()).isNotNull();
         assertThat(result.email()).isEqualTo("test@example.com");
         assertThat(result.nombre()).isEqualTo("Ana");
         assertThat(result.apellidos()).isEqualTo("García López");
@@ -81,7 +83,7 @@ class RegisterUserServiceTest {
         given(passwordEncoder.encode("password123")).willReturn("bcrypt_hash");
         given(userRepository.save(any(User.class))).willAnswer(invocation -> {
             User user = invocation.getArgument(0);
-            user.setId(1L);
+            user.setId(UUID.randomUUID());
             return user;
         });
 

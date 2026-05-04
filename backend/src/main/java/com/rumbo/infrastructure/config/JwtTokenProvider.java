@@ -25,7 +25,7 @@ public class JwtTokenProvider {
         this.expirationMs = expirationMs;
     }
 
-    public String generateToken(Long userId, String email) {
+    public String generateToken(java.util.UUID userId, String email) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + expirationMs);
 
