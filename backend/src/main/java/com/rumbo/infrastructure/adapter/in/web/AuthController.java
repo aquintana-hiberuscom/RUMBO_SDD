@@ -16,6 +16,7 @@ public class AuthController {
 
     private final RegisterUserUseCase registerUserUseCase;
     private final JwtTokenProvider jwtTokenProvider;
+    private final RegisterUserMapper registerUserMapper;
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<RegisterResponse>> register(
@@ -30,20 +31,11 @@ public class AuthController {
         );
 
         RegisterUserUseCase.RegisterUserResult result = registerUserUseCase.register(command);
-
         String token = jwtTokenProvider.generateToken(result.userId(), result.email());
-
-        RegisterResponse response = new RegisterResponse(
-                result.userId(),
-                result.email(),
-                result.nombre(),
-                result.apellidos(),
-                token
-        );
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(ApiResponse.ok(response, "Usuario registrado correctamente"));
+                .body(ApiResponse.ok(registerUserMapper.toResponse(result, token), "Usuario registrado correctamente"));
     }
 
     @ExceptionHandler(EmailAlreadyRegisteredException.class)

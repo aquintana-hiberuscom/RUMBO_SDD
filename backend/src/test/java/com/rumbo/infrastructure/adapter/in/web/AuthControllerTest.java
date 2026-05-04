@@ -35,6 +35,9 @@ class AuthControllerTest {
     @MockBean
     private JwtTokenProvider jwtTokenProvider;
 
+    @MockBean
+    private RegisterUserMapper registerUserMapper;
+
     @Test
     void register_withValidData_returns201WithToken() throws Exception {
         // Given
@@ -49,6 +52,8 @@ class AuthControllerTest {
         given(registerUserUseCase.register(any()))
                 .willReturn(new RegisterUserUseCase.RegisterUserResult(1L, "ana@example.com", "Ana", "García López"));
         given(jwtTokenProvider.generateToken(1L, "ana@example.com")).willReturn("jwt.token.here");
+        given(registerUserMapper.toResponse(any(), any()))
+                .willReturn(new RegisterResponse(1L, "ana@example.com", "Ana", "García López", "jwt.token.here"));
 
         // When / Then
         mockMvc.perform(post("/api/v1/auth/register")
