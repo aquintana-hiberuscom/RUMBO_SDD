@@ -88,14 +88,12 @@ Los datos recogidos deben cumplir con el RGPD. No se solicita información finan
 
 ## SDD Traceability
 
-> Rellenar después de ejecutar el pipeline SDD.
-
 | Artifact | Reference |
 |----------|-----------|
 | Proposal | — |
 | Spec | — |
-| Design | — |
-| Tasks | — |
+| Design | Hexagonal: `domain/model/User`, `application/port/in/RegisterUserUseCase`, `application/port/out/UserRepository`, `application/service/RegisterUserService`, `infrastructure/adapter/out/persistence/`, `infrastructure/adapter/in/web/AuthController`, `infrastructure/config/SecurityConfig` + `JwtTokenProvider` |
+| Tasks | Completado — implementación US-001 del 2026-05-04 |
 
 ---
-_Created: 2026-05-04 | Status: Draft_
+_Created: 2026-05-04 | Status: Done_
