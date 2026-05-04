@@ -15,7 +15,7 @@ services:
     networks:
       - rumbo_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U rumbo_user"]
+      test: ["CMD-SHELL", "pg_isready -U rumbo_user -d rumbo_db"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -26,19 +26,16 @@ services:
       dockerfile: Dockerfile
     container_name: rumbo_backend
     environment:
-      DATABASE_URL: postgresql://rumbo_user:rumbo_password@db:5432/rumbo_db
-      FLASK_ENV: development
-      FLASK_DEBUG: "True"
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/rumbo_db
+      SPRING_DATASOURCE_USERNAME: rumbo_user
+      SPRING_DATASOURCE_PASSWORD: rumbo_password
     ports:
-      - "5000:5000"
-    volumes:
-      - ./backend:/app
+      - "8080:8080"
     depends_on:
       db:
         condition: service_healthy
     networks:
       - rumbo_network
-    command: flask run --host=0.0.0.0
 
   frontend:
     build:
@@ -46,7 +43,7 @@ services:
       dockerfile: Dockerfile
     container_name: rumbo_frontend
     environment:
-      - NG_APP_API_URL=http://localhost:5000/api/v1
+      - NG_APP_API_URL=http://localhost:8080/api/v1
     ports:
       - "4200:4200"
     volumes:
