@@ -136,6 +136,42 @@ Ejemplo Liquibase changeset:
 - Domain and application service tests MUST NOT start a Spring context
 - Use constructor injection; never `@Autowired` on fields
 
+## Testing Policy (Mandatory)
+
+All deliverables in this project must include automated tests appropriate to their
+responsibility and level.
+
+### General Rule
+
+Every service, repository, module, or executable component MUST include tests.
+Code without tests is considered incomplete.
+
+### Test Types by Component
+
+- **Domain logic, use cases, pure services**
+  - MUST include unit tests
+  - External dependencies must be mocked
+
+- **Infrastructure components (repositories, adapters, gateways)**
+  - MUST include integration tests when applicable
+  - Database or external systems may be real or test containers
+
+- **APIs / Controllers**
+  - MUST include integration or slice tests
+  - Request/response behaviour must be validated
+
+- **Frontend components**
+  - MUST include unit and/or component tests
+  - Critical flows must be covered
+
+
+### Exception Policy
+
+Exceptions are allowed only when:
+- Explicitly justified
+- Documented in the code or specification
+- Approved as technical debt
+
 ## Coding Conventions
 
 ### Lombok (OBLIGATORIO en todas las clases Java)
