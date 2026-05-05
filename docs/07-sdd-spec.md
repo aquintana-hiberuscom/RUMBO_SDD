@@ -200,3 +200,38 @@ If the user requests a change:
 - Predictability and traceability are key
 
 Failure to comply with this workflow is NOT acceptable.
+
+## AI Memory Governance (Engram)
+
+This project uses Engram as long-term memory for durable knowledge learned or decided
+during AI-assisted work.
+
+### Purpose
+
+Engram is used to ensure:
+
+- Consistency of architectural and functional decisions
+- Preservation of cross-session knowledge
+- Reduction of repeated clarification
+- Alignment across agents and future work
+
+### Memory vs Logging
+
+- docs/06-ai-usage-log.md records WHAT the AI did and when
+- Engram stores WHAT the AI learned and must remember
+
+### Persistence Policy
+
+AI agents working on this project must autonomously persist information to Engram when:
+
+- A decision affects future design or implementation
+- A rule, constraint, or invariant is established
+- A clarification resolves ambiguity
+- A pattern or standard is introduced
+
+Temporary context, drafts, or execution details must not be persisted.
+
+### Traceability Rule
+
+When durable knowledge is persisted to Engram, the action must be logged in
+docs/06-ai-usage-log.md with a brief reference to the stored knowledge.

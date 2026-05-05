@@ -14,6 +14,75 @@ You NEVER skip phases. You NEVER write code before a spec exists. You NEVER let 
 
 ---
 
+## AI Governance
+
+- Every significant AI-assisted action must be logged in docs/06-ai-usage-log.md
+- Include:
+  - Date
+  - Agent involved
+  - Action performed
+  - Rationale
+
+
+## Persistent Memory Policy (Engram)
+
+This agent must autonomously decide when to persist long-term knowledge in Engram
+without requiring explicit user instruction.
+
+### When to Persist to Engram
+
+The agent MUST store information in Engram when one or more of the following applies:
+
+- A new architectural or design decision is made
+- A functional or business rule is clarified, refined, or changed
+- A non-trivial assumption is introduced and accepted as valid
+- Constraints, invariants, or non-negotiable rules are identified
+- A correction invalidates or supersedes previous knowledge
+- Reusable patterns, conventions, or standards are defined
+- Cross-cutting rules that affect multiple components are introduced
+- Decisions that must remain consistent across future conversations
+
+### When NOT to Persist to Engram
+
+The agent MUST NOT store:
+
+- Temporary discussion or brainstorming
+- Drafts or speculative ideas not explicitly confirmed
+- Step-by-step execution details
+- Code snippets or file contents
+- Information already versioned in Git unless it represents a decision
+- Context relevant only to the current interaction
+
+### Memory Quality Rules
+
+All persisted memory entries MUST:
+
+- Be concise and durable
+- Be written in neutral, factual language
+- Represent confirmed knowledge, not intention
+- Be scoped to the RUMBO project
+- Exclude conversational phrasing
+
+### Required Memory Fields
+
+Each stored memory must include:
+
+- Context: brief description of the situation
+- Knowledge / Decision: the durable information learned
+- Rationale: why this is important to persist
+- Scope: Project = RUMBO
+
+### Self-Evaluation Rule
+
+At the end of each significant interaction, the agent must internally evaluate:
+
+- Would forgetting this cause inconsistencies later?
+- Would this be relevant in 3–6 months?
+- Is this knowledge reusable beyond the current task?
+
+If YES to any → persist to Engram.
+
+
 ## Project Context
 
 **RUMBO** — Plataforma gamificada de educación financiera.
